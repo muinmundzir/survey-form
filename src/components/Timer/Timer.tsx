@@ -11,13 +11,12 @@ function Timer({ timer, handleTimer }: TimerProps) {
 
   useEffect(() => {
     setTimeLeft(timer);
-    console.log('transition')
-  }, []);
+  }, [timer]);
 
   useEffect(() => {
     if (timeLeft === 0) {
       handleTimer();
-      return;
+      return 
     }
 
     const intervalId = setInterval(() => {
@@ -31,7 +30,7 @@ function Timer({ timer, handleTimer }: TimerProps) {
   let seconds = timeLeft % 60;
 
   return (
-    <div className="ml-auto mb-1 font-semibold text-xl text-white">
+    <div className="mb-1 font-semibold text-right text-xl text-white">
       Time left: {minutes < 10 ? `0${minutes}` : minutes}:
       {seconds < 10 ? `0${seconds}` : seconds}
     </div>
