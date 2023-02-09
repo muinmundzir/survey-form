@@ -1,9 +1,10 @@
+import Form from "./components/Form/Form"
 
 function App() {
  
   return (
-    <div className="text-center w-full mx-auto">
-      Hello World
+    <div className="h-screen bg-gradient-to-b from-violet-400 to-red-200 mx-auto">
+      <Form />
     </div>
   )
 }
