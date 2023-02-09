@@ -18,12 +18,12 @@ function Review() {
         Thanks you for finishing the surveys!
       </h1>
       <p className="text-slate-700 mb-2">Survey Results:</p>
-      {data ? data.map((item: any) => (
+      {data.length > 0 ? data.map((item: any) => (
         <div className="mb-3" key={item.id}>
           <p className="font-semibold text-sm text-purple-700 mb-1">{item.question}</p>
           <p className="text-sm text-purple-600">- {item.answer}</p>
         </div>
-      )) : <p>No Data</p>}
+      )) : (<p className="text-sm text-slate-600">- No Data</p>)}
     </Fragment>
   );
 }
