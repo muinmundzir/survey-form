@@ -11,20 +11,30 @@ import { surveyQuestions } from "../../data";
 function Form() {
   const [questions, setQuestions] = useState(surveyQuestions);
   const [activeQuestion, setActiveQuestion] = useState(questions[0]);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [page, setPage] = useState(1);
 
   function handleSubmit() {
+    if(selectedOption === null) return alert("Please select an option");
+
     if (page === surveyQuestions.length) {
-        alert("Form submitted!")
+      alert("Form submitted!");
     } else {
-        setPage((prevValue) => prevValue + 1);
-        setActiveQuestion(questions[page - 1]);
+      setPage(page + 1);
+      setActiveQuestion(questions[page]);
+      setSelectedOption(null);
+      alert(selectedOption);
+      console.log(selectedOption);
     }
   }
 
   function handleReset() {
     setPage(1);
     setActiveQuestion(questions[0]);
+  }
+
+  function handleOptionChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setSelectedOption(e.target.value);
   }
 
   return (
@@ -34,11 +44,18 @@ function Form() {
         <p className="mb-4 font-semibold text-2xl text-purple-700">
           {activeQuestion.question}
         </p>
-        {activeQuestion.options.map(({ option }, index) => (
-          <RadioInput option={`${activeQuestion.id}`} label={option} key={index} />
+        {activeQuestion.options.map(({ option, id }, index) => (
+          <RadioInput
+            selectedOption={selectedOption}
+            onChange={handleOptionChange}
+            id={id}
+            option={`${activeQuestion.id}`}
+            label={option}
+            key={index}
+          />
         ))}
       </form>
-      <Button text="Reset" onClick={handleReset} />
+      <Button disabled={page === 1} text="Reset" onClick={handleReset} />
       <Button
         text={page === surveyQuestions.length ? "Submit" : "Next"}
         onClick={handleSubmit}
