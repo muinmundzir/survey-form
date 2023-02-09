@@ -1,3 +1,13 @@
+export interface SurveyOption {
+    id: number;
+    option: string;
+}
+export interface SurveyQuestion {
+    id: number;
+    question: string;
+    options: SurveyOption[];
+}
+
 export const surveyQuestions = [
   {
     id: 1,
